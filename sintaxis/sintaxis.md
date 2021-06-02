@@ -51,13 +51,13 @@ C:.
 ```java
 package com.axity.course.sintaxis;
 ```
-2. Se importan otras clases por medio de la *keyword* <h4 style="color:#d73a49"><b>import</b></h4>, se permite el uso del wildcard * en caso de querer importar todas las clases del paquete. [No es recomendable]
+2. Se importan otras clases por medio de la *keyword* <font color="#d73a49"><b>import</b></font>, se permite el uso del wildcard * en caso de querer importar todas las clases del paquete. [No es recomendable]
 
 ```java
 import java.util.Date;
 ```
 
-3. La *keyword* <h4 style="color:#d73a49"><b>class</b></h4> indica que se trata de una clase. 
+3. La *keyword* <font color="#d73a49"><b>class</b></font> indica que se trata de una clase. 
 <br>Una clase, regularmente, equivale a un archivo con extensión <b>.java</b>. 
 <br>Es sensible a mayúsculas y minúsculas, por convención se utilizan nombres en Upper CamelCase (PascalCase) ([Convenciones de nombrado][2]).
 <br>Las clases contienen atributos y métodos.
@@ -66,7 +66,7 @@ import java.util.Date;
 public class MyClase {
 ```
 
-4. El método principal es el método <h4 style="color:#6f42c1"><b>main</b></h4>, su firma es:
+4. El método principal es el método <font color="#6f42c1"><b>main</b></font>, su firma es:
 ```java
 public static void main (String args[]) {
     //...
@@ -74,14 +74,14 @@ public static void main (String args[]) {
 ```
 
 5. Se emplean modificadores de acceso para los atributos y los métodos con las *keywords*:
-   * <h4 style="color:#d73a49"><b>public</b></h4>,
-   * <h4 style="color:#d73a49"><b>protected</b></h4>,
-   * <h4 style="color:#d73a49"><b>private</b></h4>,
+   * <font color="#d73a49"><b>public</b></font>,
+   * <font color="#d73a49"><b>protected</b></font>,
+   * <font color="#d73a49"><b>private</b></font>,
    * O ninguno (de paquete).
 
 6. Los atributos se les indica su tipo, puede ser un primitivo (int, double) o una clase (String, Date).
 
-7. Para crear instancias de objetos se emplea la *keyword* <h4 style="color:#d73a49"><b>new</b></h4> seguida de paréntesis (constructor).
+7. Para crear instancias de objetos se emplea la *keyword* <font color="#d73a49"><b>new</b></font> seguida de paréntesis (constructor).
     ```java
     MyClase myClase = new MyClase();
     ```
