@@ -1,5 +1,48 @@
 # Sintaxis
 
+Java sigue una sintaxis similar a C/C++
+
+
+1. Se crea una estructura de paquetes (carpetas) separadas por <b>"."</b>
+```
+C:.
+└───com
+    └───axity
+        └───course
+            └───sintaxis
+                    MyClase.java
+```
+
+2. Se importan otras clases por medio de la *keyword* <font color="blue"><b>import</b></font>
+
+* Las líneas se terminan con <b>";"</b>
+
+
+```java
+package com.axity.course.sintaxis;
+
+import java.util.Date;
+
+public class MyClase {
+    private String name;
+    private Date date;
+
+    public MyClase() {
+        this.date = new Date();
+    }
+
+    public static void main (String args[]) {
+        MyClase myClase = new MyClase();
+        myClase.name = "Axity";
+
+        System.out.println(myClase.name + " [" + myClase.date + "]");
+    }
+}
+
+```
+
+
+
 
 ## Lista de palabras reservadas en Java
 
