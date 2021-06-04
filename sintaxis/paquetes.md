@@ -29,7 +29,7 @@ import [(<paquete0>.<paquete1>...<paqueteN>.]*;
 ```
 
 Por ejemplo:
-![Paquetes](img/paquetes.png "Paquetes")
+![Paquetes](img/paquetes_.png "Paquetes")
 
 ```bash
 C:.
