@@ -4,15 +4,17 @@ Las variables son los contenedores de datos.
 
 Sintaxis:
 
-    <Tipo> <nombre_variable>;
-    <Tipo> <nombre_variable> = <valor>;
+    <tipo> <nombre_variable>;
+    <tipo> <nombre_variable> = <valor>;
 
+```java
 String name = "John";
 int myNum = 15;
 
 int a;
 a = 15;
 a = 20;
+```
 
 El tipo de variable puede ser un tipo de dato primitivo, una clase de Java o una clase definida por el programador o un API.
 

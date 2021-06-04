@@ -227,10 +227,10 @@ caracteres de <b>conexión</b> o <b>números</b>.
 ## Convenciones de nombrado
 
 * [Code Conventions for the Java TM Programming Language][5] April 20th, 1999
+
 * [Google Java Style Guide][6]
 
-
-<b>TODOS</b> los identificadores deberán utilizar sólo letras ASCII y dígitos, en menor medida se puede utilizar los símbolos <b>"_"</b> y <b>"$"</b>.
+* <b>TODOS</b> los identificadores deberán utilizar sólo letras ASCII y dígitos, en menor medida se puede utilizar los símbolos <b>"_"</b> y <b>"$"</b>.
 
 
 ### Clases e interfaces
