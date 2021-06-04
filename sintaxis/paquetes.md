@@ -9,6 +9,7 @@ La función primaria de un paquete en Java es agrupar clases relacionadas, de ma
 <br>Los paquetes normalmente se emplean para:
 * Evitar conflictos de nombrado.
 * Escribir código mantenible.
+* Definir una taxonomía, separar capas (i.e. DAO, Services, Model).
 
 Existen los paquetes:
 * Paquetes internos ( Java API ).
@@ -29,6 +30,20 @@ import [(<paquete0>.<paquete1>...<paqueteN>.]*;
 
 Por ejemplo:
 ![Paquetes](img/paquetes.png "Paquetes")
+
+```bash
+C:.
+└───com
+    └───axity
+        └───course
+            └───sintaxis
+                    Address.java
+                    Classroom.java
+                    Course.java
+                    Professor.java
+                    Student.java
+```
+
 
 Es posible importar todas las clases del paquete sintaxis:
 ```java
