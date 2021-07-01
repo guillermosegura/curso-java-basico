@@ -3,11 +3,23 @@ package com.axity.course.sintaxis;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.axity.course.sintaxis.model.Address;
+
 public class Student {
-	public String name;
+	public String name = "<TBD>";
 	public String lastname;
 	private List<Address> addresses;
 	private List<Course> courses;
+	private int age;
+
+	public Student() {
+	}
+
+	public Student(String name, String lastname, int age) {
+		this.name = name;
+		this.lastname = lastname;
+		this.age = age;
+	}
 
 	/**
 	 * Método que agrega una dirección, valida que se haya inicializado la lista de
@@ -51,4 +63,11 @@ public class Student {
 		return null;
 	}
 
+	public String toString() {
+		return "{" +this.lastname + ", " + this.name + ", age " + age + "}";
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 }

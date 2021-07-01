@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+  <comment>Un comentario</comment>
+  <entry key="log4j.category.org.springframework.beans.factory">DEBUG</entry>
+  <entry key="log4j.appender.stdout">org.apache.log4j.ConsoleAppender</entry>
+  <entry key="llave">valor</entry>
+  <entry key="data4">4</entry>
+  <entry key="data2">2</entry>
+  <entry key="data1">1</entry>
+  <entry key="nueva">123</entry>
+  <entry key="log4j.appender.stdout.layout.ConversionPattern">%d{ABSOLUTE} %5p %t %c{2}:%L - %m%n</entry>
+  <entry key="log4j_rootCategory">INFO, stdout</entry>
+  <entry key="log4j.appender.stdout.layout">org.apache.log4j.PatternLayout</entry>
+  <entry key="message">Hola cómo estás!!!</entry>
+</properties>

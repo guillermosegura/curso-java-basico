@@ -26,3 +26,11 @@ hs_err_pid*
 /sintaxis/sintaxis/target
 /sintaxis/sintaxis/.project
 /sintaxis/sintaxis/.classpath
+/collections/collections/.project
+/collections/collections/.settings
+/collections/collections/target
+/collections/collections/.classpath
+/oop/oop/.project
+/oop/oop/.settings
+/oop/oop/target
+/oop/oop/.classpath

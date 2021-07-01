@@ -49,4 +49,6 @@ public class MyClase {
 
 		System.out.println(myClase.name + " [" + myClase.date + "], id:" + myClase.id);
 	}
+	
+ 
 }

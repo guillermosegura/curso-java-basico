@@ -29,7 +29,7 @@ import [(<paquete0>.<paquete1>...<paqueteN>.]*;
 ```
 
 Por ejemplo:
-![Paquetes](img/paquetes_.png "Paquetes")
+<br>![Paquetes](img/paquetes_.png "Paquetes")
 
 ```bash
 C:.
@@ -62,7 +62,7 @@ O bien sólo importar una o más clases.
 import com.axity.course.sintaxis.Address;
 import com.axity.course.sintaxis.Student;
 ```
-* <b>Nota:</b>Sólo es necesario importar las clases que son de distintos paquetes, es decir las clases del mismo paquete son visibles en el espacio de dominio del paquete.
+* <b>Nota:</b> Sólo es necesario importar las clases que son de distintos paquetes, es decir las clases del mismo paquete son visibles en el espacio de dominio del paquete.
 
 
 Es práctica común separar los paquetes por tipo, dominio o capa, por ejemplo:
@@ -103,8 +103,8 @@ En este caso existen las capas:
 
 ## Convenciones de nombrado de paquetes
 
-* Sólo emplear catacteres ASCII y en su defecto el guión "_".
-* El nombre de cominio será el DN de la empresa (cliente), i.e. com.axity, seguido por el nombre del proyecto/módulo.
+* Sólo emplear caracteres ASCII y en su defecto el guión "_".
+* El nombre de dominio será el DN de la empresa (cliente), i.e. com.axity, seguido por el nombre del proyecto/módulo.
 * Los subpaquetes deberán nombrarse por nombres de capa, negocio en minúsculas.
 * De preferencia se empleará el idioma inglés, salvo que se indique lo contrario.
 

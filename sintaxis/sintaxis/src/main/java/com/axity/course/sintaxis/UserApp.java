@@ -1,14 +1,15 @@
 package com.axity.course.sintaxis;
 
-import com.axity.course.sintaxis.a.User;
+import com.axity.course.sintaxis.a.UserDO;
+import com.axity.course.sintaxis.b.UserTO;
 
 public class UserApp {
 	public static void main(String[] args) {
 
-		User usuario = new User();
+		UserDO usuario = new UserDO();
 		usuario.name = "gsegura";
 
-		com.axity.course.sintaxis.b.User otroUsuario = new com.axity.course.sintaxis.b.User();
+		UserTO otroUsuario = new UserTO();
 		otroUsuario.username = "guillermo.segura";
 
 	}
