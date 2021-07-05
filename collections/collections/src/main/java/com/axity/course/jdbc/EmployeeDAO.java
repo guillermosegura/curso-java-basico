@@ -11,7 +11,6 @@ import java.util.List;
 
 import com.axity.course.exception.BusinessExcepcion;
 import com.axity.course.exception.BusinessExcepcionCode;
-import com.axity.course.to.Address;
 import com.axity.course.to.Employee;
 import com.axity.course.to.Office;
 
@@ -69,20 +68,20 @@ public class EmployeeDAO
     return conn;
   }
 
-  public Office findOfficeById( String officeCode )
+  public Employee findEmployeeById( String officeCode )
   {
     Connection conn = conn();
     PreparedStatement ps = null;
-    Office office = null;
+    Employee employee = null;
     try
     {
 
-      ps = conn.prepareStatement( "SELECT * FROM offices WHERE OFFICECODE = ?" );
+      ps = conn.prepareStatement( "SELECT * FROM employees WHERE EMPLOYEENUMBER = ?" );
       ps.setString( 1, officeCode );
       ResultSet rs = ps.executeQuery();
       if( rs.next() )
       {
-        office = extractOffice( rs );
+        employee = extractEmployee( rs );
       }
       else
       {
@@ -105,7 +104,7 @@ public class EmployeeDAO
       JdbcUtil.close( conn );
     }
 
-    return office;
+    return employee;
   }
 
   private Employee extractEmployee( ResultSet rs ) throws SQLException
