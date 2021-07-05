@@ -134,6 +134,11 @@ public class Customer implements Serializable
       sb.append( ", city: " ).append( this.address.getCity() );
       sb.append( ", zip: " ).append( this.address.getZip() );
     }
+    if( this.salesRepresentative != null )
+    {
+      sb.append( ", salesRepresentative: [" ).append( this.salesRepresentative.getFirstName() );
+      sb.append( " " ).append( this.salesRepresentative.getLastName() ).append( "]" );
+    }
     return sb.toString();
 
   }

@@ -12,6 +12,8 @@ import java.util.TreeMap;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
+import com.axity.course.exception.BusinessExcepcion;
+import com.axity.course.exception.BusinessExcepcionCode;
 import com.axity.course.to.Employee;
 import com.axity.course.to.Office;
 
@@ -74,7 +76,10 @@ public class EmployeeService
     }
     catch( IOException e )
     {
-
+      String msg = "Error al abrir el archivo data/employees.csv";
+      BusinessExcepcion be = new BusinessExcepcion( msg, e );
+      be.setCode( BusinessExcepcionCode.FILE_NOT_FOUND );
+      throw be;
     }
     finally
     {
@@ -108,6 +113,14 @@ public class EmployeeService
     if( this.employees == null )
     {
       this.load();
+    }
+    
+    if( !this.employees.containsKey( id ) )
+    {
+      String msg = "Empleado no encontrado";
+      BusinessExcepcion be = new BusinessExcepcion( msg );
+      be.setCode( BusinessExcepcionCode.EMPLOYEE_NOT_FOUND );
+      throw be;
     }
 
     return this.employees.get( id );

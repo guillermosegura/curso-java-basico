@@ -11,12 +11,14 @@ import java.util.TreeMap;
 
 import org.apache.commons.io.IOUtils;
 
+import com.axity.course.exception.BusinessExcepcion;
+import com.axity.course.exception.BusinessExcepcionCode;
 import com.axity.course.to.Address;
 import com.axity.course.to.Office;
 
 public class OfficeService
 {
-  private Map<String, Office> officess;
+  private Map<String, Office> offices;
 
   public void load()
   {
@@ -26,7 +28,7 @@ public class OfficeService
 
   private void loadOffices()
   {
-    officess = new TreeMap<>();
+    offices = new TreeMap<>();
 
     InputStream is = null;
     InputStreamReader isr = null;
@@ -59,14 +61,17 @@ public class OfficeService
         office.setAddress( address );
         office.setTerritory( parts[8] );
 
-        this.officess.put( office.getId(), office );
+        this.offices.put( office.getId(), office );
       }while( line != null );
       br.close();
 
     }
     catch( IOException e )
     {
-
+      String msg = "Error al abrir el archivo data/offices.csv";
+      BusinessExcepcion be = new BusinessExcepcion( msg, e );
+      be.setCode( BusinessExcepcionCode.FILE_NOT_FOUND );
+      throw be;
     }
     finally
     {
@@ -79,20 +84,29 @@ public class OfficeService
 
   public List<Office> getOffices()
   {
-    if( this.officess == null )
+    if( this.offices == null )
     {
       this.load();
     }
 
-    return new ArrayList<>( this.officess.values() );
+    return new ArrayList<>( this.offices.values() );
   }
 
   public Office getOfficeById( String id )
   {
-    if( this.officess == null )
+    if( this.offices == null )
     {
       this.load();
     }
-    return this.officess.get( id );
+    
+    if( !this.offices.containsKey( id ) )
+    {
+      String msg = "Oficina no encontrado";
+      BusinessExcepcion be = new BusinessExcepcion( msg );
+      be.setCode( BusinessExcepcionCode.OFFICE_NOT_FOUND );
+      throw be;
+    }
+    
+    return this.offices.get( id );
   }
 }
