@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.axity.course.exception.BusinessExcepcion;
@@ -29,13 +30,22 @@ public class EmployeeDAO
     {
       st = conn.createStatement();
       ResultSet rs = st.executeQuery( "SELECT * FROM employees ORDER BY EMPLOYEENUMBER" );
-      employees = new ArrayList<>();
+      employees = new LinkedList<>();
       while( rs.next() )
       {
         Employee employee = extractEmployee( rs );
         employees.add( employee );
       }
-
+      final List<Employee> emp = new LinkedList<>( employees );
+      employees.stream().forEach( e -> {
+        if( e.getReportsTo() != null )
+        {
+          // Busca el empleado
+          Employee reportsTo = emp.stream().filter( employee -> employee.equals( e.getReportsTo() ) ).findFirst()
+              .orElse( null );
+          e.setReportsTo( reportsTo );
+        }
+      } );
     }
     catch( SQLException e )
     {
@@ -68,7 +78,7 @@ public class EmployeeDAO
     return conn;
   }
 
-  public Employee findEmployeeById( String officeCode )
+  public Employee findEmployeeById( int id )
   {
     Connection conn = conn();
     PreparedStatement ps = null;
@@ -77,17 +87,25 @@ public class EmployeeDAO
     {
 
       ps = conn.prepareStatement( "SELECT * FROM employees WHERE EMPLOYEENUMBER = ?" );
-      ps.setString( 1, officeCode );
+      ps.setInt( 1, id );
       ResultSet rs = ps.executeQuery();
       if( rs.next() )
       {
         employee = extractEmployee( rs );
+
+        if( employee.getReportsTo() != null )
+        {
+          // Busca el empleado
+          Employee reportsTo = findEmployeeById( employee.getReportsTo().getId() );
+          employee.setReportsTo( reportsTo );
+        }
+
       }
       else
       {
-        String msg = "Oficina no encontrado";
+        String msg = "Empleado no encontrado";
         BusinessExcepcion be = new BusinessExcepcion( msg );
-        be.setCode( BusinessExcepcionCode.OFFICE_NOT_FOUND );
+        be.setCode( BusinessExcepcionCode.EMPLOYEE_NOT_FOUND );
         throw be;
       }
 
@@ -109,7 +127,7 @@ public class EmployeeDAO
 
   private Employee extractEmployee( ResultSet rs ) throws SQLException
   {
-    //﻿EMPLOYEENUMBER,LASTNAME,FIRSTNAME,EXTENSION,EMAIL,OFFICECODE,REPORTSTO,JOBTITLE  
+    // ﻿EMPLOYEENUMBER,LASTNAME,FIRSTNAME,EXTENSION,EMAIL,OFFICECODE,REPORTSTO,JOBTITLE  
     Employee employee = new Employee();
     employee.setId( rs.getInt( "EMPLOYEENUMBER" ) );
     employee.setLastName( rs.getString( "LASTNAME" ) );
@@ -118,14 +136,15 @@ public class EmployeeDAO
     employee.setEmail( rs.getString( "EMAIL" ) );
     employee.setJobTitle( rs.getString( "JOBTITLE" ) );
     int reportsToId = rs.getInt( "REPORTSTO" );
-    if (reportsToId != 0) {
+    if( reportsToId != 0 )
+    {
       Employee reportsTo = new Employee();
       reportsTo.setId( reportsToId );
       employee.setReportsTo( reportsTo );
     }
     Office office = new Office();
-    office.setId( rs.getString( "OFFICECODE" )  );
-    employee.setOffice( office  );
+    office.setId( rs.getString( "OFFICECODE" ) );
+    employee.setOffice( office );
 
     return employee;
   }

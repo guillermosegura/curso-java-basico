@@ -71,8 +71,9 @@ public class LambdaApp
     //
     // System.out.println("-------");
     //
-     List<Integer> randomInts = r.ints(1, 200).limit(100).collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
-     randomInts.stream().distinct().sorted().forEach(e -> System.out.print(e + " "));
+     List<Integer> randomInts = r.ints(1, 200).limit(200).collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+//     randomInts.stream().distinct().sorted().forEach(e -> System.out.print(e + " "));
+     randomInts.stream().distinct().sorted().forEach( e -> System.out.print( e + ", " ) );
     //
      System.out.println("\n----");
     

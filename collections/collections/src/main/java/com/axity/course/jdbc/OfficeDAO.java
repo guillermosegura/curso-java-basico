@@ -5,7 +5,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLType;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -123,6 +125,53 @@ public class OfficeDAO
     office.setAddress( address );
     office.setTerritory( rs.getString( "TERRITORY" ) );
     return office;
+  }
+
+  public void createOffice( Office office )
+  {
+    Connection conn = conn();
+    PreparedStatement ps = null;
+    try
+    {
+      ps = conn.prepareStatement( "INSERT INTO offices "
+          + " (﻿OFFICECODE,CITY,PHONE,ADDRESSLINE1,ADDRESSLINE2,STATE,COUNTRY,POSTALCODE,TERRITORY)  "
+          + " VALUES(?,?,?,?,?,?,?,?,?)" );
+      ps.setString( 1, office.getId() );
+      ps.setString( 2, office.getAddress().getCity() );
+      ps.setString( 3, office.getAddress().getPhone() );
+      ps.setString( 4, office.getAddress().getAddressLine1() );
+      JdbcUtil.safeSetString( 5, office.getAddress().getAddressLine2(), Types.VARCHAR, ps);
+      if( office.getAddress().getAddressLine2() != null )
+      {
+        ps.setString( 5, office.getAddress().getAddressLine2() );
+      }
+      else
+      {
+        ps.setNull( 5, Types.VARCHAR );
+      }
+      
+      if( office.getAddress().getState() != null )
+      {
+        ps.setString( 6, office.getAddress().getAddressLine2() );
+      }
+      else
+      {
+        ps.setNull( 5, Types.VARCHAR );
+      }
+
+      ps.executeUpdate();
+    }
+    catch( SQLException e )
+    {
+      BusinessExcepcion be = new BusinessExcepcion( "Error al crear la conexión a la BD", e );
+      be.setCode( BusinessExcepcionCode.DB_CONNECTION_ERROR );
+      throw be;
+    }
+    finally
+    {
+      JdbcUtil.close( ps );
+      JdbcUtil.close( conn );
+    }
   }
 
 }

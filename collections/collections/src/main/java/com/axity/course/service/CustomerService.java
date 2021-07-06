@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -23,10 +24,17 @@ public class CustomerService
 {
   private Map<Integer, Customer> customers;
 
+  private EmployeeService employeeService;
+
+  public CustomerService()
+  {
+    employeeService = new EmployeeService();
+  }
+
   public void load()
   {
     loadEmployees();
-    EmployeeService employeeService = new EmployeeService();
+    // EmployeeService employeeService = new EmployeeService();
     this.customers.values().stream().forEach( c -> {
       if( c.getSalesRepresentative() != null )
       {
@@ -34,11 +42,19 @@ public class CustomerService
       }
     } );
 
+    // for( Customer c : this.customers.values() )
+    // {
+    // if( c.getSalesRepresentative() != null )
+    // {
+    // c.setSalesRepresentative( employeeService.getEmployeeById( c.getSalesRepresentative().getId() ) );
+    // }
+    // }
+
   }
 
   private void loadEmployees()
   {
-    customers = new TreeMap<>();
+    customers = Collections.synchronizedMap( new TreeMap<>() );
 
     InputStream is = null;
     InputStreamReader isr = null;
@@ -60,8 +76,16 @@ public class CustomerService
         String[] parts = line.split( "," );
         // CUSTOMERNUMBER,CUSTOMERNAME,CONTACTLASTNAME,CONTACTFIRSTNAME,PHONE,ADDRESSLINE1,ADDRESSLINE2,CITY,STATE,POSTALCODE,COUNTRY,SALESREPEMPLOYEENUMBER,CREDITLIMIT
 
+        int id = Integer.parseInt( parts[0] );
+
+        if( this.customers.containsKey( id ) )
+        {
+          System.err.println( "Llave duplicada " + id );
+          continue;
+        }
+
         Customer customer = new Customer();
-        customer.setId( Integer.parseInt( parts[0] ) );
+        customer.setId( id );
         customer.setName( parts[1] );
         customer.setContactLastName( parts[2] );
         customer.setContactFirstName( parts[3] );
@@ -71,8 +95,9 @@ public class CustomerService
         address.setAddressLine2( parts[6] );
         address.setCity( parts[7] );
         address.setState( parts[8] );
-        address.setCountry( parts[9] );
-        address.setZip( parts[10] );
+        address.setZip( parts[9] );
+        address.setCountry( parts[10] );
+
         customer.setAddress( address );
         if( NumberUtils.isCreatable( parts[11] ) )
         {
@@ -83,6 +108,7 @@ public class CustomerService
         customer.setCreditLimit( new BigDecimal( parts[12] ) );
 
         this.customers.put( customer.getId(), customer );
+
       }while( line != null );
       br.close();
 
@@ -110,7 +136,9 @@ public class CustomerService
       this.load();
     }
 
-    return new ArrayList<>( this.customers.values() );
+    // return new ArrayList<>( this.customers.values() );
+    // return Collections.unmodifiableList( new ArrayList<>( this.customers.values() ) );
+    return Collections.synchronizedList( new ArrayList<>( this.customers.values() ) );
   }
 
   public Customer getCustomerById( int id )

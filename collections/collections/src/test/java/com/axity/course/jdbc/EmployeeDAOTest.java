@@ -1,15 +1,18 @@
 package com.axity.course.jdbc;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import com.axity.course.exception.BusinessExcepcion;
+import com.axity.course.exception.BusinessExcepcionCode;
 import com.axity.course.to.Employee;
-import com.axity.course.to.Office;
 
 public class EmployeeDAOTest
 {
@@ -34,12 +37,27 @@ public class EmployeeDAOTest
   @Test
   public void testFindEmployeeById()
   {
-    String[] ids = { "1002", "1056", "1076", "1088", "1102" };
-    for( String id : ids )
+    int[] ids = { 1002, 1056, 1076, 1088, 1102 };
+    for( int id : ids )
     {
       Employee employee = this.employeeDAO.findEmployeeById( id );
       assertNotNull( employee );
       System.out.println( employee );
+    }
+  }
+
+  @Test(expected = BusinessExcepcion.class)
+  public void testFindEmployeeById_nonExistent()
+  {
+    try
+    {
+      this.employeeDAO.findEmployeeById( 9999 );
+      fail( "It should never ever get here!" );
+    }
+    catch( BusinessExcepcion be )
+    {
+      assertEquals( BusinessExcepcionCode.EMPLOYEE_NOT_FOUND, be.getCode() );
+      throw be;
     }
   }
 

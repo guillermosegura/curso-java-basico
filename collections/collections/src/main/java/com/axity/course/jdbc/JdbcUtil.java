@@ -51,4 +51,10 @@ public final class JdbcUtil
       }
     }
   }
+
+  public static void safeSetString( int column, String value, int type, PreparedStatement ps )
+  {
+    // TODO Auto-generated method stub
+    
+  }
 }
